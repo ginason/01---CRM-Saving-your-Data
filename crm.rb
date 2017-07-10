@@ -3,8 +3,6 @@ require_relative 'contact.rb'
 class CRM
 
   def initialize
-
-
   end
 
   def main_menu
@@ -24,6 +22,8 @@ class CRM
     puts '[6] Exit'
     puts 'Enter a number'
   end
+
+
 
   def call_option(user_selected)
     case user_selected
@@ -47,7 +47,12 @@ class CRM
     print "Enter a Note:"
     note = gets.chomp
 
-    Contact.create(first_name, last_name, email, note)
+    contact = Contact.create(
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    note: note
+    )
   end
 
   def modify_existing_contact
@@ -59,7 +64,8 @@ class CRM
     attribute = gets.chomp
     puts "change to ?????"
     value = gets.chomp
-    finding.update(attribute, value)
+    finding.update_attribute(attribute, value)
+    # finding.update({attribute => value})
 
   end
 
@@ -91,10 +97,3 @@ end
 at_exit do
   ActiveRecord::Base.connection.close
 end
-
-# Contact.create(
-# first_name: first_name,
-# last_name: last_name
-# email: email,
-# note: note
-# )
